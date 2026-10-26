@@ -4,6 +4,7 @@ A Python app for tracking Steam game player counts.
 
 ## Project structure
 
+```text
 steam_player_count_tracker/
 ├── .github/workflows/ci.yml            # CI/CD Pipeline   
 ├── docs/
@@ -23,5 +24,5 @@ steam_player_count_tracker/
 ├── docker-compose.yaml
 ├── requirements.txt
 └── requirements-dev.txt
-
+```
 
