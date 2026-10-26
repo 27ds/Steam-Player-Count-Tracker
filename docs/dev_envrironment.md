@@ -4,7 +4,7 @@
 Visual Studio Code
 
 ## Python Version
->= 1.14.0
+`>= 1.14.0`
 
 ## Linter und Formatter
 - Pyrefly 
