@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Steam-Player-Count-Tracker"
+version = "0.1.0"
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.2.0",
+    "pyrefly",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pyrefly]
+strictness = "strict"
+
+[tool.ruff]
+indent-width = 4
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "N"]
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "double"
