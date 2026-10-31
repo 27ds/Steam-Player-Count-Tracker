@@ -1,6 +1,17 @@
 services:
-  app:
-    build: .
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - ./backend:/app
+    working_dir: /app
     command: python
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+    working_dir: /app

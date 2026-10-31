@@ -1,13 +1,8 @@
 # dev_environment
-
-## Code Editor
-Visual Studio Code
-
-## Python Version
-`>= 1.14.0`
+The development environment is provided by a Docker Compose stack.
 
 ## Linter und Formatter
-- Pyrefly 
+- Pyrefly
 - Ruff
 
 ## Docs
