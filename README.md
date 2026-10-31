@@ -6,9 +6,9 @@ An application designed to track, store, and visualize player count trends for s
 ## 1. Team & Roles
 **Team:** Photonware
 * **Product Owner:** Delia
+* **Scrum Master / Developer:** Thomas
 * **Developer:** Mika
 * **Developer:** Catherine
-* **Developer:** Thomas
 
 ---
 
@@ -34,24 +34,21 @@ The objective of this project is to collect and clearly present historical data 
 ## Project structure
 
 ```text
-steam_player_count_tracker/
-├── .github/workflows/ci.yml            # CI/CD Pipeline   
-├── docs/
-│   ├── architecture.md                 # C4, static and dynamic diagrams
-│   └── retro.md                        # sprint retrospectives
-├── src/steam_player_count_tracker/
-│   ├── source/                         # 1. data source (API / sensor)
-│   ├── logic/                          # 2. logic
-│   ├── storage/                        # 3. storage interface + database
-│   ├── output/                         # 4. export / chart
-│   ├── config.py                       # 5. reads config file and .env
-│   └── main.py
-├── tests/                              # pytest tests
-├── config.ini                          # configuration (no secrets)
-├── .env.example                        # names of the secrets, fake values
-├── Dockerfile
-├── docker-compose.yaml
-├── requirements.txt
-└── requirements-dev.txt
+Steam-Player-Count-Tracker/
+├── .github/workflows/       # CI/CD pipelines
+├── backend/                 # Backend service (Python, pyproject.toml, Dockerfile, etc.)
+│   ├── src/
+│   ├── pyproject.toml
+│   └── Dockerfile
+├── frontend/                # Web-based frontend (package.json, Dockerfile, etc.)
+│   ├── src/
+│   ├── package.json
+│   └── Dockerfile
+├── .editorconfig            # Coding styles & whitespace standardization for editors
+├── config.conf              # Configuration file (e.g., ports, etc.)
+├── docker-compose.yml       # Central Docker configuration for orchestration
+├── Makefile                 # Shortcut commands for build, run, lint, and typecheck
+├── .gitignore
+└── README.md
 ```
 
