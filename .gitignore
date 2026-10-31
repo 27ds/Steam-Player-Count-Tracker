@@ -1,1 +1,11 @@
+# Python
+__pycache__/
+
+# Virtual Environments
+.venv/
+venv/
+
+# Tool Caches
+.ruff_cache/
+.pyrefly/
 
