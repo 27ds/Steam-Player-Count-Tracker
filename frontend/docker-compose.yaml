@@ -1,8 +1,8 @@
 services:
-  frontend:
+  app:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      # dockerfile: Dockerfile
     volumes:
-      - ./frontend:/app
+      - .:/app
     working_dir: /app
