@@ -6,7 +6,16 @@
 
 
 def main() -> None:
+<<<<<<< HEAD
     pass
+=======
+<<<<<<< HEAD
+    pass  
+=======
+   print(aaaa)
+    pass
+>>>>>>> a562873 (error in main.py for testing)
+>>>>>>> f927cc6 (error in main.py for testing)
 
 
 if __name__ == "__main__":
