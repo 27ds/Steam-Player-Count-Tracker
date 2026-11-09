@@ -6,8 +6,7 @@
 
 
 def main() -> None:
-    print("aaaa")
-    print(aaa)
+    pass
 
 
 if __name__ == "__main__":
