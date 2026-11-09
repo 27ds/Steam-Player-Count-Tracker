@@ -7,7 +7,7 @@
 
 def main() -> None:
     print("aaaa")
-    print("aaa")
+    print(aaa)
 
 
 if __name__ == "__main__":
