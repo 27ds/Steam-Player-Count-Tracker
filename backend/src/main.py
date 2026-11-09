@@ -10,9 +10,5 @@ def main() -> None:
     print("aaa")
 
 
-
-
-
-
 if __name__ == "__main__":
     main()
