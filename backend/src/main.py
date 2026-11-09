@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import api
-import client
-import db_adapter
+# import api
+# import client
+# import db_adapter
 
 
 def main() -> None:
