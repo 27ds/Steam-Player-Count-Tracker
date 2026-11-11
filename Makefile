@@ -17,8 +17,8 @@ backend-format:
 	docker compose -f ./backend/docker-compose.yaml run --rm app ruff format tests
 
 backend-lint:
-	docker compose -f ./backend/docker-compose.yaml run --rm app ruff check src
-	docker compose -f ./backend/docker-compose.yaml run --rm app ruff check tests
+	docker compose -f ./backend/docker-compose.yaml run --rm app ruff check src --fix
+	docker compose -f ./backend/docker-compose.yaml run --rm app ruff check tests --fix
 
 backend-typecheck:
 	docker compose -f ./backend/docker-compose.yaml run --rm app pyrefly check src

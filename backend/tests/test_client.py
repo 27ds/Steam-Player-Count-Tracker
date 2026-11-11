@@ -1,5 +1,6 @@
-from unittest.mock import MagicMock, patch
 import unittest
+from unittest.mock import MagicMock, patch
+
 from src.client import SteamClient
 
 
