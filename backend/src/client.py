@@ -13,9 +13,15 @@ class SteamClient:
                 return data
 
             return {}
-        except Exception as e:
-            print(f"Fehler beim Abruf: {e}")
-            return {}
+        except requests.exceptions.Timeout:
+            print("Error: The request took too long (timeout).")
+        except requests.exceptions.ConnectionError:
+            print("Error: Unable to connect to the server (network error/DNS).")
+        except requests.exceptions.HTTPError as e:
+            print(f"An HTTP error occurred: {e}")
+        except requests.exceptions.RequestException as e:
+            print(f"Another unexpected request error has occurred: {e}")
+        return {}
 
     @staticmethod
     def get_current_player(game_id: int) -> int:
