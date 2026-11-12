@@ -20,12 +20,14 @@ where = ["src"]
 
 [tool.pyrefly]
 strictness = "strict"
+search-path = ["."]
 
 [tool.ruff]
 indent-width = 4
 line-length = 88
 
 [tool.ruff.lint]
+fixable = ["I"]  # I = Impoerts
 # select = ["E", "F", "N"] -> Default are ok
 
 [tool.ruff.format]
