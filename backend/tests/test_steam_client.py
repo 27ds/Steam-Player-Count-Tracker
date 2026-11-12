@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from src.client import SteamClient
+from src.steam_client import SteamClient
 
 
 class TestSteamClient(unittest.TestCase):
-    @patch("src.client.requests.get")
+    @patch("src.steam_client.requests.get")
     def test_get_current_player_success(self, mock_get):
         """normal request"""
         mock_response = MagicMock()
@@ -18,7 +18,7 @@ class TestSteamClient(unittest.TestCase):
         player_count = SteamClient.get_current_player(730)
         self.assertEqual(player_count, 5000)
 
-    @patch("src.client.requests.get")
+    @patch("src.steam_client.requests.get")
     def test_get_current_player_api_error_404(self, mock_get):
         """error 404 server not reachable"""
         mock_response = MagicMock()
@@ -28,7 +28,7 @@ class TestSteamClient(unittest.TestCase):
         player_count = SteamClient.get_current_player(999999)
         self.assertEqual(player_count, -1)
 
-    @patch("src.client.requests.get")
+    @patch("src.steam_client.requests.get")
     def test_get_current_player_api_error_respons(self, mock_get):
         """invalid response"""
         mock_response = MagicMock()
@@ -41,7 +41,7 @@ class TestSteamClient(unittest.TestCase):
         player_count = SteamClient.get_current_player(730)
         self.assertEqual(player_count, -1)
 
-    @patch("src.client.requests.get")
+    @patch("src.steam_client.requests.get")
     def test_get_game_name_success(self, mock_get):
         """get name from game ID"""
         game_id = 730
