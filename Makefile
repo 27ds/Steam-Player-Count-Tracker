@@ -12,6 +12,9 @@ backend-up:
 backend-down:
 	docker compose -f ./backend/docker-compose.yaml down
 
+backend-shell:
+	docker compose -f ./backend/docker-compose.yaml run --rm app bash
+
 backend-format:
 	docker compose -f ./backend/docker-compose.yaml run --rm app ruff format src
 	docker compose -f ./backend/docker-compose.yaml run --rm app ruff format tests
