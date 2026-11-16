@@ -1,4 +1,4 @@
-class DBAdapter:
+class DBClient:
     def store_data(self, game_id: int, player_count: int) -> None:
         pass
 
