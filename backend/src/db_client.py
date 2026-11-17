@@ -55,7 +55,7 @@ class DBClient:
         with self._db_connect() as conn, conn.cursor() as cur:
             cur.execute(
                 t"INSERT INTO games (game_id, game_name) VALUES ({game_id}, {game_name})"
-        )
+            )
 
     def get_games(self) -> list[dict[str, int | str]]:
         """
@@ -67,7 +67,6 @@ class DBClient:
         with self._db_connect() as conn, conn.cursor(row_factory=dict_row) as cur:
             cur.execute("SELECT game_id, game_name FROM games ORDER BY game_name")
             return cur.fetchall()
-
 
     def add_data(self, game_id: int, player_count: int) -> None:
         """
@@ -81,12 +80,12 @@ class DBClient:
 
         if player_count < 0:
             return
-    
+
         with self._db_connect() as conn, conn.cursor() as cur:
             cur.execute(
                 "INSERT INTO game_infos (game_id, player_count) VALUES (%s, %s)",
                 (game_id, player_count),
-            )   
+            )
 
     def get_data(self, game_id: int) -> list[dict[str, datetime | int]]:
         """
@@ -105,7 +104,7 @@ class DBClient:
             )
             return cur.fetchall()
 
-    def remove_game(self, game_id:int) -> None:
+    def remove_game(self, game_id: int) -> None:
         """
         Remove a game and all its game infos ex. player count.
 
@@ -118,6 +117,6 @@ class DBClient:
         """
         with self._db_connect() as conn, conn.cursor() as cur:
             cur.execute(
-            "DELETE FROM games WHERE game_id = %s", (game_id,),
-        )
-    
+                "DELETE FROM games WHERE game_id = %s",
+                (game_id,),
+            )
