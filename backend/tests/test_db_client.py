@@ -66,7 +66,7 @@ class TestDBClient(unittest.TestCase):
     @patch("src.db_client.psycopg.connect")
     def test_get_games_uses_dict_row(self, mock_connect):
         """rows are returned as dicts"""
-        db, mock_cursor = self._create_client(mock_connect)
+        db, _ = self._create_client(mock_connect)
         mock_conn = mock_connect.return_value.__enter__.return_value
 
         db.get_games()
