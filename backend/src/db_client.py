@@ -84,7 +84,7 @@ class DBClient:
     
         with self._db_connect() as conn, conn.cursor() as cur:
             cur.execute(
-                "INSERT INTO player_counts (game_id, player_count) VALUES (%s, %s)",
+                "INSERT INTO game_infos (game_id, player_count) VALUES (%s, %s)",
                 (game_id, player_count),
             )   
 
