@@ -1,5 +1,6 @@
 import unittest
 from datetime import UTC, datetime
+from string.templatelib import Template
 from unittest.mock import MagicMock, patch
 
 from psycopg.rows import dict_row
@@ -19,6 +20,17 @@ class TestDBClient(unittest.TestCase):
         db = DBClient()
         mock_cursor.execute.reset_mock()  # ignore CREATE TABLE calls from __init__
         return db, mock_cursor
+
+    def _get_query(self, query: Template) -> tuple[str, tuple]:
+        """return the SQL text and the values of a t-string query"""
+        self.assertIsInstance(query, Template)  # fails if an f-string was used
+        return "".join(query.strings), query.values
+
+    @patch.dict("os.environ", {}, clear=True)
+    def test_init_without_database_url(self):
+        """error if DATABASE_URL is not set"""
+        with self.assertRaises(RuntimeError):
+            DBClient()
 
     @patch("src.db_client.psycopg.connect")
     def test_init_creates_tables(self, mock_connect):
@@ -40,28 +52,21 @@ class TestDBClient(unittest.TestCase):
 
         db.add_game(730, "Counter-Strike 2")
 
-        template = mock_cursor.execute.call_args.args[0]
-        self.assertIn("INSERT INTO games", "".join(template.strings))
-        self.assertEqual(template.values, (730, "Counter-Strike 2"))
+        sql, values = self._get_query(mock_cursor.execute.call_args.args[0])
+        self.assertIn("INSERT INTO games", sql)
+        self.assertEqual(values, (730, "Counter-Strike 2"))
 
     @patch("src.db_client.psycopg.connect")
     def test_get_games_success(self, mock_connect):
         """normal request"""
         db, mock_cursor = self._create_client(mock_connect)
-        mock_cursor.fetchall.return_value = [
+        rows = [
             {"game_id": 730, "game_name": "Counter-Strike 2"},
             {"game_id": 526870, "game_name": "Satisfactory"},
         ]
+        mock_cursor.fetchall.return_value = rows
 
-        games = db.get_games()
-
-        self.assertEqual(
-            games,
-            [
-                {"game_id": 730, "game_name": "Counter-Strike 2"},
-                {"game_id": 526870, "game_name": "Satisfactory"},
-            ],
-        )
+        self.assertEqual(db.get_games(), rows)
 
     @patch("src.db_client.psycopg.connect")
     def test_get_games_uses_dict_row(self, mock_connect):
@@ -88,9 +93,9 @@ class TestDBClient(unittest.TestCase):
 
         db.add_data(730, 5000)
 
-        sql, params = mock_cursor.execute.call_args.args
+        sql, values = self._get_query(mock_cursor.execute.call_args.args[0])
         self.assertIn("INSERT INTO game_infos", sql)
-        self.assertEqual(params, (730, 5000))
+        self.assertEqual(values, (730, 5000))
 
     @patch("src.db_client.psycopg.connect")
     def test_add_data_negative_player_count(self, mock_connect):
@@ -114,10 +119,10 @@ class TestDBClient(unittest.TestCase):
         data = db.get_data(730)
 
         self.assertEqual(data, rows)
-        sql, params = mock_cursor.execute.call_args.args
+        sql, values = self._get_query(mock_cursor.execute.call_args.args[0])
         self.assertIn("FROM game_infos", sql)
         self.assertIn("ORDER BY time", sql)
-        self.assertEqual(params, (730,))
+        self.assertEqual(values, (730,))
 
     @patch("src.db_client.psycopg.connect")
     def test_get_data_empty(self, mock_connect):
@@ -134,9 +139,9 @@ class TestDBClient(unittest.TestCase):
 
         db.remove_game(730)
 
-        sql, params = mock_cursor.execute.call_args.args
+        sql, values = self._get_query(mock_cursor.execute.call_args.args[0])
         self.assertIn("DELETE FROM games", sql)
-        self.assertEqual(params, (730,))
+        self.assertEqual(values, (730,))
 
 
 if __name__ == "__main__":

@@ -6,10 +6,13 @@ from psycopg.rows import dict_row
 
 
 class DBClient:
-    """Database client witch interacts with the PostgreSQL Database."""
+    """Database client which interacts with the PostgreSQL Database."""
 
     def __init__(self) -> None:
-        self._dsn: str = os.environ["DATABASE_URL"]
+        dsn = os.environ.get("DATABASE_URL")
+        if not dsn:
+            raise RuntimeError("Environment variable DATABASE_URL is not set.")
+        self._dsn: str = dsn
         self._create_tables()
 
     def _db_connect(self) -> psycopg.Connection:
@@ -51,6 +54,10 @@ class DBClient:
         """
         add game to game table
 
+        Args:
+            game_id: The ID of the Steam game.
+            game_name: The name of the Steam game.
+
         """
         with self._db_connect() as conn, conn.cursor() as cur:
             cur.execute(
@@ -65,7 +72,7 @@ class DBClient:
         A list of games, e.g. [{"game_id": 526870, "game_name": "Satisfactory"}].
         """
         with self._db_connect() as conn, conn.cursor(row_factory=dict_row) as cur:
-            cur.execute("SELECT game_id, game_name FROM games ORDER BY game_name")
+            cur.execute(t"SELECT game_id, game_name FROM games ORDER BY game_name")
             return cur.fetchall()
 
     def add_data(self, game_id: int, player_count: int) -> None:
@@ -83,8 +90,8 @@ class DBClient:
 
         with self._db_connect() as conn, conn.cursor() as cur:
             cur.execute(
-                "INSERT INTO game_infos (game_id, player_count) VALUES (%s, %s)",
-                (game_id, player_count),
+                t"INSERT INTO game_infos (game_id, player_count) "
+                t"VALUES ({game_id}, {player_count})"
             )
 
     def get_data(self, game_id: int) -> list[dict[str, datetime | int]]:
@@ -98,9 +105,8 @@ class DBClient:
         """
         with self._db_connect() as conn, conn.cursor(row_factory=dict_row) as cur:
             cur.execute(
-                "SELECT time, player_count FROM game_infos "
-                "WHERE game_id =%s ORDER BY time",
-                (game_id,),
+                t"SELECT time, player_count FROM game_infos "
+                t"WHERE game_id = {game_id} ORDER BY time"
             )
             return cur.fetchall()
 
@@ -116,7 +122,5 @@ class DBClient:
         automatically
         """
         with self._db_connect() as conn, conn.cursor() as cur:
-            cur.execute(
-                "DELETE FROM games WHERE game_id = %s",
-                (game_id,),
-            )
+            cur.execute(t"DELETE FROM games WHERE game_id = {game_id}")
+            
