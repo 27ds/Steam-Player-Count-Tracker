@@ -9,3 +9,6 @@ venv/
 .ruff_cache/
 .pyrefly/
 
+# Environment File
+.env
+

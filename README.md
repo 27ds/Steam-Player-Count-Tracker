@@ -59,6 +59,7 @@ Steam-Player-Count-Tracker/
 │   ├── Makefile             # Shortcut commands for build, run, lint, and typecheck
 │   ├── docker-compose.yaml  # Central Docker configuration for orchestration
 │   └── pyproject.toml       # Python dependencies and tool settings
+│   └── .env.example         # Add Database Password into env File
 ├── docs/
 │   ├── architecture.md      # System overview: components and how they interact
 │   ├── dev_environment.md   # How to set up and run the project locally

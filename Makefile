@@ -30,8 +30,15 @@ backend-typecheck:
 backend-unittest-steam_client:
 	docker compose -f ./backend/docker-compose.yaml run --rm app python -m unittest tests.test_steam_client -v
 
-backend-check: backend-format backend-lint backend-typecheck
-backend-unittest: backend-unittest-steam_client
+backend-unittest-db_client:
+	docker compose -f ./backend/docker-compose.yaml run --rm app python -m unittest tests.test_db_client -v
+
+backend-check: 
+	backend-format backend-lint backend-typecheck
+
+backend-unittest: 
+	backend-unittest-steam_client
+	backend-unittest-db_client
 
 # ===============================================================
 # FRONTEND
