@@ -2,6 +2,7 @@ services:
   app:
     build:
       context: .
+      target: runtime
       dockerfile: Dockerfile
     volumes:
       - .:/app
