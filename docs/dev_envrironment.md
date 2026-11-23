@@ -2,25 +2,26 @@
 The development environment is provided by a Docker Compose stack.
 
 ## MySQL-Verbindung
-Das Backend verbindet sich mit einer extern betriebenen MySQL-Datenbank. Vor dem Start
-des Compose-Stacks müssen diese Umgebungsvariablen gesetzt sein:
+The backend connects to a PostgreSQL database.
 
-- `MYSQL_HOST`
-- `MYSQL_PORT` (optional, Standard: `3306`)
-- `MYSQL_USER`
-- `MYSQL_PASSWORD`
-- `MYSQL_DATABASE`
+Before starting the Docker Compose stack, the following environment variable must be set:
 
-Die Tabelle `tracked_games` wird beim ersten API-Aufruf automatisch angelegt.
-Zugangsdaten sollten nicht in Dateien eingecheckt werden.
+   -DATABASE_URL
 
-## API-Endpunkte
-- `GET /api/get_game/<game_id>` — gespeicherte Daten eines überwachten Spiels
-- `POST /api/add_game` — Spiel hinzufügen; JSON-Body: `{"game_id": 730}`
-- `DELETE /api/remove_game/<game_id>` — Spiel aus der Überwachung entfernen
-- `GET /api/get_count/<game_id>` — aktuelle Spielerzahl eines überwachten Spiels
+Example:
 
-Der bisherige `GET /game/<game_id>`-Endpunkt bleibt aus Kompatibilitätsgründen verfügbar.
+DATABASE_URL=postgresql://user:password@host:5432/database
+
+The tracked_games table is created automatically on the first API request.
+
+Database credentials must not be committed to the repository.
+
+## API-Endpoint
+- `GET /api/get_game/<game_id>` — Returns stored information about a tracked game.
+- `POST /api/add_game` — Adds a game to tracking.
+- `DELETE /api/remove_game/<game_id>` — Removes a game from tracking.
+- `GET /api/get_count/<game_id>` — Returns the current player count
+
 
 ## Linter und Formatter
 - Pyrefly
@@ -40,3 +41,4 @@ Der bisherige `GET /game/<game_id>`-Endpunkt bleibt aus Kompatibilitätsgründen
 
 ## Naming Convention
 - Snake Case
+

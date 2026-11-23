@@ -14,28 +14,28 @@ class APIApp:
         self.steam_client = SteamClient()
 
         self.app.add_url_rule(
-            "/api/games/<int:game_id>",
+            "/api/get_game/<int:game_id>",
             "get_game",
             self.get_game,
             methods=["GET"],
         )
 
         self.app.add_url_rule(
-            "/api/games",
+            "/api/add_game",
             "add_game",
             self.add_game,
             methods=["POST"],
         )
 
         self.app.add_url_rule(
-            "/api/games/<int:game_id>",
+            "/api/remove_game/<int:game_id>",
             "remove_game",
             self.remove_game,
             methods=["DELETE"],
         )
 
         self.app.add_url_rule(
-            "/api/games/<int:game_id>/count",
+            "/api/get_count/<int:game_id>",
             "get_count",
             self.get_count,
             methods=["GET"],
