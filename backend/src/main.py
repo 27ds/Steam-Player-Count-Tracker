@@ -1,8 +1,8 @@
-import threading
+# import threading - not used yet, but will be used in the future
 import time
 from datetime import datetime
 
-import api
+# import api - not used yet, but will be used in the future for the provider class
 import db_adapter
 import steam_client
 
@@ -42,8 +42,8 @@ class DataGetter:  # Thread 1 -> SteamClient -> DBAdapter (or PlayerCountCollect
             start = time.monotonic()
             try:
                 self.fetch_count_and_time_once()
-            except Exception as e:
-                print(f"Error while fetching player count: {e}")
+            #except Exception as e:
+            #    print(f"Error while fetching player count: {e}")
             duration = time.monotonic() - start
             time.sleep(max(0, self.interval_seconds - duration))  # TODO write error
 
@@ -55,7 +55,7 @@ def main() -> None:
     db.creat_tables()
 
     getter = DataGetter(steam, db, INTERVAL_SECONDS)
-    provider = ...  # TODO
+    #provider = ...#TODO - not implemented yet, but will be used in the future for the provider class
 
     getter.load_game_names()
 
