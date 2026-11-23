@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # import threading - not used yet, but will be used in the future
 import logging
 import time
