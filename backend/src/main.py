@@ -1,4 +1,5 @@
 # import threading - not used yet, but will be used in the future
+import logging
 import time
 from datetime import datetime
 
@@ -7,6 +8,7 @@ import db_adapter
 import steam_client
 
 
+logger = logging.getLogger(__name__)
 INTERVAL_SECONDS: int = 300
 
 
@@ -42,13 +44,15 @@ class DataGetter:  # Thread 1 -> SteamClient -> DBAdapter (or PlayerCountCollect
             start = time.monotonic()
             try:
                 self.fetch_count_and_time_once()
-            except:
-                print(f"Error while fetching player count: {e}")
+            except Exception:
+                logger.exception("Error while fetching player counts")
             duration = time.monotonic() - start
             time.sleep(max(0, self.interval_seconds - duration))  # TODO write error
 
 
 def main() -> None:
+    logging.basicConfig(level=logging.INFO)
+
     steam = steam_client.SteamClient()
     db = db_adapter.DbAdapter()
 
