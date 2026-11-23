@@ -8,7 +8,6 @@ import steam_client
 
 
 INTERVAL_SECONDS: int = 300
-DB_PATH: str = "data.db"
 
 
 class DataGetter: #Thread 1 -> SteamClient -> DBAdapter (or PlayerCountCollector)
@@ -55,7 +54,7 @@ class DataGetter: #Thread 1 -> SteamClient -> DBAdapter (or PlayerCountCollector
 
 def main() -> None:
     steam = steam_client.SteamClient()
-    db = db_adapter.DbAdapter(DB_PATH)
+    db = db_adapter.DbAdapter()
 
     db.creat_tables()
 
