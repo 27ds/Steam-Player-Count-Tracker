@@ -4,6 +4,7 @@ from steam_client import SteamClient
 from db_client import DBClient
 from steam_client import SteamClient
 
+
 class APIApp:
     """Flask API application."""
 
