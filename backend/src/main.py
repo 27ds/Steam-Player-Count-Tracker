@@ -55,7 +55,7 @@ def main() -> None:
     db.creat_tables()
 
     getter = DataGetter(steam, db, INTERVAL_SECONDS)
-    #provider = ...#TODO - not implemented yet, but will be used in the future for the provider class
+    # provider = ...#TODO - not implemented yet, but will be used in the future for the provider class
 
     getter.load_game_names()
 
