@@ -26,10 +26,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: backend-ci-image
-        path: /tmp/docker-images/ci-image.tar.gz
-        retention-days: 1
+          path: /tmp/docker-images/ci-image.tar.gz
+          retention-days: 1
 
-  format:
+  Format:
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -56,7 +56,7 @@ jobs:
         with:
           commit_message: "style: auto-format with ruff"
 
-  lint:
+  Linting:
     runs-on: ubuntu-latest
     needs: format
     steps:
@@ -78,7 +78,7 @@ jobs:
         run: |
           docker run --rm -v "${{ github.workspace }}/backend:/app" -w /app backend-ci ruff check src tests
 
-  typecheck:
+  Typecheck:
     runs-on: ubuntu-latest
     needs: format
     steps:
@@ -100,7 +100,7 @@ jobs:
         run: |
           docker run --rm -v "${{ github.workspace }}/backend:/app" -w /app backend-ci pyrefly check src tests
 
-  unittests:
+  Unittests:
     runs-on: ubuntu-latest
     needs: [lint, typecheck]
     steps:
