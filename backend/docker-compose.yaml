@@ -6,12 +6,28 @@ services:
     volumes:
       - .:/app
     working_dir: /app
-    command: python src/api.py
+    command: python src/main.py
     environment:
-      MYSQL_HOST: "${MYSQL_HOST:?Set MYSQL_HOST}"
-      MYSQL_PORT: "${MYSQL_PORT:-3306}"
-      MYSQL_USER: "${MYSQL_USER:?Set MYSQL_USER}"
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD:?Set MYSQL_PASSWORD}"
-      MYSQL_DATABASE: "${MYSQL_DATABASE:?Set MYSQL_DATABASE}"
-    ports:
-      - "5001:5000"
+        DATABASE_URL: postgresql://postgres:{POSTGRES_PASSWORD}@db:5432/mydb
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 20s
+
+volumes:
+  db_data:

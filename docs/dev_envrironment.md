@@ -36,6 +36,7 @@ Der bisherige `GET /game/<game_id>`-Endpunkt bleibt aus Kompatibilitätsgründen
 - fix/
 - test/
 - build/
+- enh/
 
 ## Naming Convention
 - Snake Case

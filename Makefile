@@ -16,21 +16,26 @@ backend-shell:
 	docker compose -f ./backend/docker-compose.yaml run --rm app bash
 
 backend-format:
-	docker compose -f ./backend/docker-compose.yaml run --rm app ruff format src
-	docker compose -f ./backend/docker-compose.yaml run --rm app ruff format tests
+	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app ruff format src
+	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app ruff format tests
 
 backend-lint:
-	docker compose -f ./backend/docker-compose.yaml run --rm app ruff check src --fix
-	docker compose -f ./backend/docker-compose.yaml run --rm app ruff check tests --fix
+	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app ruff check src --fix
+	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app ruff check tests --fix
 
 backend-typecheck:
-	docker compose -f ./backend/docker-compose.yaml run --rm app pyrefly check src
-	docker compose -f ./backend/docker-compose.yaml run --rm app pyrefly check tests
+	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app pyrefly check src
+	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app pyrefly check tests
 
-backend-unittest:
-	docker compose -f ./backend/docker-compose.yaml run --rm app python -m unittest discover -s tests -v
+backend-unittest-steam_client:
+	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app python -m unittest tests.test_steam_client -v
+
+backend-unittest-db_client:
+	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app python -m unittest tests.test_db_client -v
 
 backend-check: backend-format backend-lint backend-typecheck
+
+backend-unittest: backend-unittest-steam_client backend-unittest-db_client
 
 # ===============================================================
 # FRONTEND

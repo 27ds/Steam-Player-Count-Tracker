@@ -7,8 +7,7 @@ name = "Steam-Player-Count-Tracker"
 version = "0.1.0"
 dependencies = [
     "requests>=2.31.0",
-    "flask>=3.0.0",
-    "mysql-connector-python>=8.3.0",
+    "psycopg[binary]>=3.3",
 ]
 
 [project.optional-dependencies]
