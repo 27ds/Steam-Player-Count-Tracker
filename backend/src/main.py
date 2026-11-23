@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 
 # import api - not used yet, but will be used in the future for the provider class
-import db_adapter
+import db_client
 import steam_client
 
 
@@ -33,7 +33,6 @@ class DataGetter:  # Thread 1 -> SteamClient -> DBAdapter (or PlayerCountCollect
             count = self.steam.get_current_player(game_id)
             if count == -1:
                 continue
-            timestamp = self.steam.timestamp
             self.db.save_player_count(game_id, timestamp, count)
             self.db.timestamp = timestamp
 
