@@ -72,7 +72,7 @@ class DBClient:
         A list of games, e.g. [{"game_id": 526870, "game_name": "Satisfactory"}].
         """
         with self._db_connect() as conn, conn.cursor(row_factory=dict_row) as cur:
-            cur.execute(t"SELECT game_id, game_name FROM games ORDER BY game_name")
+            cur.execute("SELECT game_id, game_name FROM games ORDER BY game_name")
             return cur.fetchall()
 
     def add_data(self, game_id: int, player_count: int) -> None:

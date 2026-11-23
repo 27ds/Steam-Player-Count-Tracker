@@ -8,7 +8,8 @@ An application designed to track, store, and visualize player count trends for s
   - [3. Scope (Project Scope v1.0)](#3-scope-project-scope-v10)
     - [In Scope](#in-scope)
   - [4. Development Process and Community Rules](#4-development-process-and-community-rules)
-  - [5. Project structure](#5-project-structure)
+  - [5. Setup](#5-setup)
+  - [6. Project structure](#6-project-structure)
 
 
 
@@ -47,7 +48,13 @@ The objective of this project is to collect and clearly present historical data 
 - **Issue planning:** Every issue has a **priority** (3 - high / 2 - medium / 1 - low) and an estimated **size** (XS / S / M / L / XL).
 - **Definition of Done:** Before an issue can be set to **Ready**, it needs a Definition of Done (DoD): a short checklist of what must be true for the issue to count as finished.
 
-## 5. Project structure
+## 5. Setup
+Before starting docker set credentials:
+
+cp .env.example .env  
+nano .env  # add your credentials 
+
+## 6. Project structure
 
 ```text
 Steam-Player-Count-Tracker/
