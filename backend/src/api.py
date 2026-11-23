@@ -1,12 +1,16 @@
 from flask import Flask, jsonify, request
 from steam_client import SteamClient
 
+from db_client import DBClient
+from steam_client import SteamClient
 
 class APIApp:
     """Flask API application."""
 
     def __init__(self) -> None:
         self.app = Flask(__name__)
+        self.db_client = DBClient()
+        self.steam_client = SteamClient()
 
         self.app.add_url_rule(
             "/api/games/<int:game_id>",
