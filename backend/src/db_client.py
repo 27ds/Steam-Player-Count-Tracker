@@ -123,3 +123,21 @@ class DBClient:
         """
         with self._db_connect() as conn, conn.cursor() as cur:
             cur.execute(t"DELETE FROM games WHERE game_id = {game_id}")
+            
+if __name__ == "__main__":
+    # local test
+    game_id = 526870  # Satisfactory
+
+    db = DBClient()
+    print("Database initialized, tables created.")
+
+    db.remove_game(game_id)  # clean up from previous test runs
+    db.add_game(game_id, "Satisfactory")
+    db.add_data(game_id, 9396)
+    db.add_data(game_id, -1)  # should be ignored
+
+    print(f"Games: {db.get_games()}")
+    print(f"Data: {db.get_data(game_id)}")
+
+    db.remove_game(game_id)
+    print(f"Games after remove: {db.get_games()}")
