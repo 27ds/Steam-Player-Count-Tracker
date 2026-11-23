@@ -42,8 +42,8 @@ class DataGetter:  # Thread 1 -> SteamClient -> DBAdapter (or PlayerCountCollect
             start = time.monotonic()
             try:
                 self.fetch_count_and_time_once()
-            #except Exception as e:
-            #    print(f"Error while fetching player count: {e}")
+            except:
+                print(f"Error while fetching player count: {e}")
             duration = time.monotonic() - start
             time.sleep(max(0, self.interval_seconds - duration))  # TODO write error
 
