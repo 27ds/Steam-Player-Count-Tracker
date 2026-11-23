@@ -23,21 +23,17 @@ class APIApp:
 
         if game_name == "" or player_count == -1:
             return jsonify(
-                {
-                    "status": "error",
-                    "message": "Game not found",
-                    "game_id": game_id
-                }
+                {"status": "error", "message": "Game not found", "game_id": game_id}
             ), 404
 
         return jsonify(
             {
                 "status": "success",
-                 "data": {
+                "data": {
                     "game_id": game_id,
                     "game_name": game_name,
-                    "player_count": player_count
-                }
+                    "player_count": player_count,
+                },
             }
         )
 
