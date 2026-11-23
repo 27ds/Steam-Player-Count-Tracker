@@ -51,8 +51,11 @@ The objective of this project is to collect and clearly present historical data 
 ## 5. Setup
 Before starting docker set credentials:
 
-cp .env.example .env  
-nano .env  # add your credentials 
+```sh
+cd backend
+cp .env.example .env
+nano .env  # add your credentials
+```
 
 ## 6. Project structure
 
