@@ -15,6 +15,9 @@ backend-down:
 backend-shell:
 	docker compose -f ./backend/docker-compose.yaml run --rm app bash
 
+backend-init_default_games:
+	docker compose -f ./backend/docker-compose.yaml run --rm app python src/init_db_for_dev.py
+
 backend-format:
 	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app ruff format src
 	docker compose -f ./backend/docker-compose.yaml run --rm --no-deps app ruff format tests
