@@ -4,16 +4,7 @@ The development environment is provided by a Docker Compose stack.
 ## MySQL-Verbindung
 The backend connects to a PostgreSQL database.
 
-Before starting the Docker Compose stack, the following environment variable must be set:
-
-   -DATABASE_URL
-
-Example:
-
-DATABASE_URL=postgresql://user:password@host:5432/database
-
 The tracked_games table is created automatically on the first API request.
-
 Database credentials must not be committed to the repository.
 
 ## API-Endpoint
