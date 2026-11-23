@@ -15,6 +15,7 @@ The development environment is provided by a Docker Compose stack.
 - fix/
 - test/
 - build/
+- enh/
 
 ## Naming Convention
 - Snake Case
