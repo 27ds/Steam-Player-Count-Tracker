@@ -24,7 +24,7 @@ class SteamClient:
         return {}
 
     @staticmethod
-    def get_current_player(game_id: int) -> int:
+    def get_current_player_count(game_id: int) -> int:
         """Get the current player count from the Steam API.
 
         Args:
@@ -63,7 +63,7 @@ class SteamClient:
 
 if __name__ == "__main__":
     # local test
-    app_id = 526870  # Satisfactory
-    current_player: int = SteamClient.get_current_player(app_id)
-    game_name: str = SteamClient.get_game_name(app_id)
-    print(f"Game: {game_name}, current player: {current_player}")
+    game_id = 526870  # Satisfactory
+    current_player_count: int = SteamClient.get_current_player_count(game_id)
+    game_name: str = SteamClient.get_game_name(game_id)
+    print(f"Game: {game_name}, current player: {current_player_count}")
