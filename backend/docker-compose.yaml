@@ -6,6 +6,6 @@ services:
     volumes:
       - .:/app
     working_dir: /app
-    command: python src/api.py
+    command: python src/main.py
     ports:
       - "5001:5000"
