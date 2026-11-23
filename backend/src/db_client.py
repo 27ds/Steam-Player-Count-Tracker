@@ -123,4 +123,3 @@ class DBClient:
         """
         with self._db_connect() as conn, conn.cursor() as cur:
             cur.execute(t"DELETE FROM games WHERE game_id = {game_id}")
-            
