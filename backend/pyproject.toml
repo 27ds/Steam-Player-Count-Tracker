@@ -5,8 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "Steam-Player-Count-Tracker"
 version = "0.1.0"
-description = "An application designed to track, store, and visualize player count trends for selected Steam games over time.
-"
+description = "An application designed to track, store, and visualize player count trends for selected Steam games over time."
 requires-python = ">=3.14"
 dependencies = [
     "requests>=2.31.0",
@@ -61,5 +60,4 @@ convention = "google"   # also disables the D rules that conflict with each othe
 [tool.ruff.format]
 indent-style = "space"
 quote-style = "double"
-indent-width = 4
 docstring-code-format = true
