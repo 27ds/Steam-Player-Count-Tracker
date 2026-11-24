@@ -8,6 +8,7 @@ from src.steam_client import SteamClient
 
 class TestSteamClient(unittest.TestCase):
     """Tests for the diffrent functions."""
+
     @patch("src.steam_client.requests.get")
     def test_get_current_player_success(self, mock_get: MagicMock) -> None:
         """Normal request."""
