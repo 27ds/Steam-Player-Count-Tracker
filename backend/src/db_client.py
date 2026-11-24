@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
     db.add_data(730, 5000)  # DB is setting timestamp with now()
 
-    measured_at = datetime.now(UTC) # timestamp when reading
+    measured_at = datetime.now(UTC)  # timestamp when reading
     db.add_data(730, 5000, measured_at)
     db.add_data(526870, 9396, measured_at)  # two rows, same timestamp
 
