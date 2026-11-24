@@ -46,3 +46,4 @@ jobs:
         with:
           files: "**/*.md"
           incremental_files_only: false
+          arguments: --config tools/markdown/cspell.json

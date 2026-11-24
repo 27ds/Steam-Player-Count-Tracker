@@ -1,4 +1,4 @@
-.PHONY: backend-build backend-up backend-down backend-lint backend-typecheck frontend-build frontend-up frontend-down
+.PHONY: backend-build backend-up backend-down backend-lint backend-typecheck frontend-build frontend-up frontend-down doku-build doku-lint doku-spellchecking
 
 # ===============================================================
 # BACKEND
@@ -55,3 +55,20 @@ frontend-up:
 frontend-down:
 	docker compose -f ./frontend/docker-compose.yaml down
 
+
+# ===============================================================
+# DOKU
+# ===============================================================
+doku-build:
+	docker build -f tools/markdown/Dockerfile -t md-check .
+
+doku-lint:
+	docker run --rm -v "$$PWD:/workspace" md-check markdownlint-cli2 \
+		"**/*.md" "#**/.github/pull_request_template.md"
+
+doku-spellchecking:
+	docker run --rm -v "$$PWD:/workspace" -w /workspace md-check cspell lint \
+		--config /workspace/tools/markdown/cspell.json \
+		"**/*.md"
+
+doku-check: doku-lint doku-spellchecking
