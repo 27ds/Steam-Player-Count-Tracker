@@ -23,6 +23,9 @@ where = ["src"]
 strictness = "strict"
 search-path = ["."]
 
+[tool.pyrefly.errors]
+missing-import = "ignore"
+
 [tool.ruff]
 indent-width = 4
 line-length = 88
