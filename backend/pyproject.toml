@@ -19,6 +19,7 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["."]
+include = ["src*"]
 
 [tool.pyrefly]
 strictness = "strict"
