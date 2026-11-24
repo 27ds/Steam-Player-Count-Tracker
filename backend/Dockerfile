@@ -3,6 +3,7 @@ WORKDIR /app
 
 # Linter / Typecheck (for CI/CD)
 FROM base AS ci
+COPY pyproject.toml /app/pyproject.toml
 RUN pip install --no-cache-dir ".[dev]"
 COPY . .
 
