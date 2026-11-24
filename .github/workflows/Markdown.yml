@@ -19,7 +19,7 @@ jobs:
             **/*.md
             #**/node_modules
 
-  Link Check:
+  Link-Check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,7 +30,7 @@ jobs:
         with:
           args: --offline --no-progress "**/*.md"
 
-  Spell Check:
+  Spell-Check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
