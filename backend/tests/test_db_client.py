@@ -57,6 +57,18 @@ class TestDBClient(unittest.TestCase):
         self.assertEqual(values, (730, "Counter-Strike 2"))
 
     @patch("src.db_client.psycopg.connect")
+    def test_add_data_with_time(self, mock_connect):
+        """time is inserted if given"""
+        db, mock_cursor = self._create_client(mock_connect)
+        measured_at = datetime(2026, 11, 24, 9, 0, tzinfo=UTC)
+
+        db.add_data(730, 5000, measured_at)
+
+        sql, values = self._get_query(mock_cursor.execute.call_args.args[0])
+        self.assertIn("INSERT INTO game_infos (game_id, time, player_count)", sql)
+        self.assertEqual(values, (730, measured_at, 5000))
+
+    @patch("src.db_client.psycopg.connect")
     def test_get_games_success(self, mock_connect):
         """normal request"""
         db, mock_cursor = self._create_client(mock_connect)
