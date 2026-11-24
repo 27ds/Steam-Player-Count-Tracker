@@ -5,7 +5,7 @@
 -
 
 ## Testing
-- [ ] `make backend-format`     (Ruff formatin passed)
+- [ ] `make backend-format`     (Ruff formating passed)
 - [ ] `make backend-lint`       (Ruff check passed)
 - [ ] `make backend-typecheck`  (Pyrefly check passed)
 - [ ] Tested locally with `make backend-build && make backend-up`
