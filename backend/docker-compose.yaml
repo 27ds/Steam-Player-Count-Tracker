@@ -2,8 +2,8 @@ services:
   app:
     build:
       context: .
-      target: runtime
       dockerfile: Dockerfile
+      target: runtime
     volumes:
       - .:/app
     working_dir: /app
