@@ -3,8 +3,7 @@ name: Markdown Pipeline
 on:
   push:
     branches: ["**"]
-    paths:
-      - "**.md"
+
 
 jobs:
   Lint:
