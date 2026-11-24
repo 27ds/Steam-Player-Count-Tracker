@@ -14,10 +14,11 @@ dependencies = [
 dev = [
     "ruff>=0.2.0",
     "pyrefly",
+    "pytest>=9.2.0"
 ]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]
 
 [tool.pyrefly]
 strictness = "strict"
