@@ -20,7 +20,7 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
+  
 [tool.pyrefly]
 strictness = "strict"
 search-path = ["."]
@@ -30,7 +30,7 @@ indent-width = 4
 line-length = 88
 
 [tool.ruff.lint]
-fixable = ["I"]  # I = Impoerts
+fixable = ["I"]  # I = Imports
 extend-select = [
     "E", "W",   # pycodestyle (flake8 core)
     "C90",      # mccabe complexity (flake8 / pylint too-complex)
