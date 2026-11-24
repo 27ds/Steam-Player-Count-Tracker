@@ -6,6 +6,9 @@
 backend-build:
 	docker compose -f ./backend/docker-compose.yaml build
 
+backend-build-dev:
+	docker compose -f ./backend/docker-compose.yaml build --target dev
+
 backend-up:
 	docker compose -f ./backend/docker-compose.yaml up -d
 
