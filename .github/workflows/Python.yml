@@ -1,8 +1,10 @@
-name: CI
+name: Python Pipeline
 
 on:
   push:
     branches: ["**"]
+    paths:
+      - "**.py"
 
 permissions:
   contents: write
