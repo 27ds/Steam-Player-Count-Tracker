@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import UTC, datetime
 
 import psycopg
 from psycopg.rows import dict_row
