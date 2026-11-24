@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Build CI image
         run: docker build --target ci -t backend-ci ./backend
@@ -23,7 +23,7 @@ jobs:
           docker save backend-ci | gzip > /tmp/docker-images/ci-image.tar.gz
 
       - name: Upload image tar
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: backend-ci-image
           path: /tmp/docker-images/ci-image.tar.gz
@@ -34,12 +34,12 @@ jobs:
     needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+
         with:
           ref: ${{ github.ref }}
 
       - name: Download image tar
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: backend-ci-image
           path: /tmp/docker-images
@@ -61,12 +61,12 @@ jobs:
     needs: Format
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.ref }}
 
       - name: Download image tar
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: backend-ci-image
           path: /tmp/docker-images
@@ -83,12 +83,12 @@ jobs:
     needs: Format
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.ref }}
 
       - name: Download image tar
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: backend-ci-image
           path: /tmp/docker-images
@@ -105,12 +105,12 @@ jobs:
     needs: [Linting, Typecheck]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.ref }}
 
       - name: Download image tar
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: backend-ci-image
           path: /tmp/docker-images
