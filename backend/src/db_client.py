@@ -75,24 +75,32 @@ class DBClient:
             cur.execute("SELECT game_id, game_name FROM games ORDER BY game_name")
             return cur.fetchall()
 
-    def add_data(self, game_id: int, player_count: int) -> None:
-        """
-        Add game data ex. a player count for a game, to the game_infos table.
+    def add_data(
+        self, game_id: int, player_count: int, time: datetime | None = None
+    ) -> None:
+        """Add a player count for a game to the game_infos table.
 
         Args:
             game_id: The ID of the Steam game.
             player_count: The current player count. Negative values
                 (failed Steam requests) are ignored.
+            time: When the player count was measured. If None, the database
+                sets the current time (UTC) automatically.
         """
-
         if player_count < 0:
             return
 
         with self._db_connect() as conn, conn.cursor() as cur:
-            cur.execute(
-                t"INSERT INTO game_infos (game_id, player_count) "
-                t"VALUES ({game_id}, {player_count})"
-            )
+            if time is None:
+                cur.execute(
+                    t"INSERT INTO game_infos (game_id, player_count) "
+                    t"VALUES ({game_id}, {player_count})"
+                )
+            else:
+                cur.execute(
+                    t"INSERT INTO game_infos (game_id, time, player_count) "
+                    t"VALUES ({game_id}, {time}, {player_count})"
+                )
 
     def get_data(self, game_id: int) -> list[dict[str, datetime | int]]:
         """
@@ -136,6 +144,12 @@ if __name__ == "__main__":
     db.add_game(game_id, "Satisfactory")
     db.add_data(game_id, 9396)
     db.add_data(game_id, -1)  # should be ignored
+
+    db.add_data(730, 5000)  # DB is setting timestamp with now()
+
+    measured_at = datetime.now(UTC) # timestamp when reading
+    db.add_data(730, 5000, measured_at)
+    db.add_data(526870, 9396, measured_at)  # two rows, same timestamp
 
     print(f"Games: {db.get_games()}")
     print(f"Data: {db.get_data(game_id)}")
