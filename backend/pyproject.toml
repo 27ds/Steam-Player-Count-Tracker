@@ -5,6 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "Steam-Player-Count-Tracker"
 version = "0.1.0"
+description = "An application designed to track, store, and visualize player count trends for selected Steam games over time."
+requires-python = ">=3.14"
 dependencies = [
     "requests>=2.31.0",
     "psycopg[binary]>=3.3",
@@ -13,7 +15,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "ruff>=0.2.0",
-    "pyrefly",
+    "pyrefly>=1.4.1",
 ]
 
 [tool.setuptools.packages.find]
@@ -28,9 +30,34 @@ indent-width = 4
 line-length = 88
 
 [tool.ruff.lint]
-fixable = ["I"]  # I = Impoerts
-# select = ["E", "F", "N"] -> Default are ok
+fixable = ["I"]  # I = Imports
+extend-select = [
+    "E", "W",   # pycodestyle (flake8 core)
+    "C90",      # mccabe complexity (flake8 / pylint too-complex)
+    "I",        # isort
+    "N",        # pep8-naming
+    "UP",       # pyupgrade: modern syntax for your target-version
+    "B",        # bugbear
+    "S",        # bandit security checks
+    "DTZ",      # naive datetimes
+    "T20",      # print / pdb left in code
+    "G",        # logging format
+    "RET",      # return-statement hygiene
+    "PL",       # pylint (PLC, PLE, PLR, PLW)
+    "RUF",      # ruff-specific
+    "D",        # pydocstyle: docstrings required
+    "ANN",      # flake8-annotations: type hints required
+]
+ignore = [
+    "PLR2004",  # magic-value comparison: too noisy in practice
+    "D105",     # magic methods (__repr__, __eq__) are self-explanatory
+    "D107",     # __init__ args are documented in the class docstring (Google style)
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"   # also disables the D rules that conflict with each other
 
 [tool.ruff.format]
 indent-style = "space"
 quote-style = "double"
+docstring-code-format = true
