@@ -3,7 +3,7 @@ WORKDIR /app
 
 # Linter / Typecheck (for CI/CD)
 FROM base AS ci
-RUN pip install --no-cache-dir ruff pyrefly
+RUN pip install --no-cache-dir ".[dev]"
 COPY . .
 
 # Runtime App
