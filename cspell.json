@@ -1,0 +1,13 @@
+{
+    "language": "en,de",
+    "words": [
+        "Photonware",
+        "Mika",
+        "pyproject",
+        "Pyrefly",
+        "Ruff"
+    ],
+    "ignorePaths": [
+        "__pycache__/**"
+    ]
+}

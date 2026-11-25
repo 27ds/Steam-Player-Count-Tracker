@@ -20,6 +20,9 @@ jobs:
           globs: |
             **/*.md
             #**/node_modules
+            #**/.github/pull_request_template.md
+            #**/.github/ISSUE_TEMPLATE/**
+            #**/docs/drafts/*.md
 
   Link-Check:
     runs-on: ubuntu-latest
