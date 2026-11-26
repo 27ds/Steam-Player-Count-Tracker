@@ -1,0 +1,49 @@
+name: Feature
+description: Propose a new feature or component
+title: "[Feature]: "
+labels: ["feature"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What should be built and why?
+      placeholder: The API should provide an endpoint that returns ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Break the feature down into concrete steps.
+      value: |
+        - [ ] 
+        - [ ] 
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: When is this issue done?
+      placeholder: |
+        - Endpoint returns player counts as JSON
+        - Unit tests exist and pass
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Backend
+        - Frontend
+        - Database
+        - CI/CD
+        - API
+        - Other
+    validations:
+      required: true
